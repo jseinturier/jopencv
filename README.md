@@ -1,15 +1,18 @@
 # OpenCV Java multiplatform wrapper
 This library enable to use OpenCV capabilities from a single jar on various systems (Windows, Linux) on various architectures (x86_32, x86_64, ARM)
 
-## 1. Integration within Maven project
+## 1. Integration
+OpenCV natives jar can be integrated to Maven projects or can be used as standalone jar.
+
+## 1.1. Maven
 To import the library just add the following dependency to your maven project:
 ```xml
 
-<!-- JOrigin repository -->      
+<!-- JOrigin repository -->          
 <repository>
-   <id>jorigin</id>
+  <id>jorigin</id>
   <name>jorigin-maven</name>
-  <url>http://www.seinturier.fr/maven</url>
+  <url>http://maven.jorigin.org</url>
 </repository>
 
 <!-- The OpenCV Java  -->
@@ -19,6 +22,9 @@ To import the library just add the following dependency to your maven project:
   <version>4.4.0</version>
 </dependency>
 ```
+
+## 1.2. Standalone
+The library can be used as a standalone. The OpenCV and OpenCV natives jars can be downloaded from the [release page](https://github.com/jseinturier/opencv-natives/releases/) and integrated to your classpath. 
 
 ## 2. Usage
 Integrate the jar to your project and make a call to ``OpenCVNatives.isAvailable()`` to check if the OpenCV native wrapping is enabled.
