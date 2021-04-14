@@ -29,7 +29,7 @@ The library can be used as a standalone. The OpenCV and OpenCV natives jars can 
 ## 2. Usage
 Integrate the jar to your project and make a call to ``OpenCVNatives.isAvailable()`` to check if the OpenCV native wrapping is enabled.
 
-It is possible to specify a system library to use as OpenCV native by setting the Java system property ``org.opencv.natives`` to toint the library file you want to use.
+It is possible to override the OpenCV system library to use by setting the Java system property ``org.opencv.natives`` to point the library file you want to use.
 
 ## 3. Building
 If you prefer to build the library, following steps are required:
