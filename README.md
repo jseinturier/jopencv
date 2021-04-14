@@ -19,7 +19,7 @@ To import the library just add the following dependency to your maven project:
 <dependency>
   <groupId>org.opencv</groupId>
   <artifactId>opencv-natives</artifactId>
-  <version>4.5.0</version>
+  <version>4.5.1</version>
 </dependency>
 ```
 
