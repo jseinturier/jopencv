@@ -3,9 +3,48 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.opencv</groupId>
     <artifactId>opencv-natives</artifactId>
-    <version>4.4.0</version>
+    <version>4.5.0</version>
+    
+    <licenses>
+      <license>
+        <name>The GNU Lesser General Public License, Version 3.0</name>
+        <url>http://www.gnu.org/licenses/lgpl-3.0.txt</url>
+        <distribution>repo</distribution>
+      </license>
+    </licenses>
+  
+    <developers>
+      <developer>
+        <id>jseinturier</id>
+        <name>Julien Seinturier</name>
+        <email>seinturier@gmail.com</email>
+        <url>http://www.seinturier.fr</url>
+        <organization>JOrigin</organization>
+        <organizationUrl>http://www.jorigin.org</organizationUrl>
+        <roles>
+          <role>architect</role>
+          <role>developer</role>
+        </roles>
+        <timezone>France/Paris</timezone>
+        <properties>
+          <!-- <picUrl>http://www.example.com/jdoe/pic</picUrl> -->
+        </properties>
+      </developer>
+    </developers>
+    
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <maven.compiler.release>11</maven.compiler.release>
+      <maven.compiler.source>11</maven.compiler.source>
+      <maven.compiler.target>11</maven.compiler.target>
+    
+      <maven.plugin.compiler.version>3.8.1</maven.plugin.compiler.version>
+      <maven.plugin.deploy.version>3.1.1</maven.plugin.deploy.version>
+      <maven.plugin.javadoc.version>3.1.1</maven.plugin.javadoc.version>
+      <maven.plugin.release.version>3.0.0-M1</maven.plugin.release.version>
+      <maven.plugin.nexus.version>1.6.8</maven.plugin.nexus.version>
+      <maven.plugin.source.version>3.2.0</maven.plugin.source.version>
+      <maven.plugin.scm-provider-gitexe.version>1.11.12</maven.plugin.scm-provider-gitexe.version>
     </properties>
     
     <repositories>     
@@ -18,9 +57,9 @@
       
       <!-- JOrigin repository -->      
       <repository>
-        <id>jseinturier</id>
-        <name>jseinturier-maven</name>
-        <url>http://www.seinturier.fr/maven</url>
+        <id>jorigin</id>
+        <name>jorigin-maven</name>
+        <url>http://maven.jorigin.org</url>
       </repository>
       
     </repositories>
@@ -29,7 +68,7 @@
       <dependency>
         <groupId>org.opencv</groupId>
         <artifactId>opencv</artifactId>
-        <version>4.4.0</version>
+        <version>4.5.0</version>
       </dependency>
     </dependencies>
     
@@ -44,25 +83,70 @@
                 </excludes>
             </resource>
         </resources>
+        
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.5.1</version>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                </configuration>
-            </plugin>
+       
+          <!--  Compile sources -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>${maven.plugin.compiler.version}</version>
+            <configuration>
+              <release>${maven.compiler.release}</release>
+              <source>${maven.compiler.source}</source>
+              <target>${maven.compiler.target}</target>
+            </configuration>
+          </plugin>
             
-            <plugin>
-                <artifactId>maven-install-plugin</artifactId>
-                <version>3.0.0-M1</version>
-                <configuration>
-                <createChecksum>true</createChecksum>
-                </configuration>
-            </plugin>
+          <!-- Generate sources jar during package phase 
+               equivalent to maven sources:jar -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+		    <version>${maven.plugin.source.version}</version>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
             
+          <!-- Generate apidoc jar during package phase 
+               equivalent to maven javadoc:jar -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+		    <version>${maven.plugin.javadoc.version}</version>
+		
+		    <!-- Embedding Latex formulas within javadoc using MathJax-->
+		    <configuration>
+
+              <additionalJOptions>
+                <additionalJOption>--allow-script-in-comments</additionalJOption>
+              </additionalJOptions>
+              <header>'&lt;script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"&gt;&lt;/script&gt;'</header>
+            </configuration>  
+        
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+            
+          <plugin>
+            <artifactId>maven-install-plugin</artifactId>
+            <version>3.0.0-M1</version>
+            <configuration>
+              <createChecksum>true</createChecksum>
+            </configuration>
+          </plugin>  
         </plugins>
     </build>
 </project>

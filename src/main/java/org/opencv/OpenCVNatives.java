@@ -20,12 +20,15 @@ import java.util.logging.Logger;
  */
 public class OpenCVNatives {
 
+	/**
+	 * The name of the property that enables to specify external OpenCV native library.
+	 */
 	public static final String OPENCV_NATIVES_PROPERTY_NAME = "org.opencv.natives";
 	
 	private static boolean available = false;
 
-	private static String dllName  = "opencv_java440.dll";
-	private static String soName   = "libopencv_java440.so";
+	private static String dllName  = "opencv_java450.dll";
+	private static String soName   = "libopencv_java450.so";
 
 	{init();}
 
@@ -193,6 +196,7 @@ public class OpenCVNatives {
 
 	/**
 	 * Check if the openCV native library is available and accessible from Java.
+	 * @return <code>true</code> if OpenCV native bindings is available for this system and <code>false</code> otherwise
 	 */
 	public static boolean isAvailable(){
 		if (!available){
