@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.opencv</groupId>
     <artifactId>opencv-natives</artifactId>
-    <version>4.5.1</version>
+    <version>4.5.2</version>
     
     <licenses>
       <license>
@@ -68,7 +68,7 @@
       <dependency>
         <groupId>org.opencv</groupId>
         <artifactId>opencv</artifactId>
-        <version>4.5.1</version>
+        <version>4.5.2</version>
       </dependency>
     </dependencies>
     
