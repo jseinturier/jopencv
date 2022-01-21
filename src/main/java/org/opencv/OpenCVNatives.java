@@ -27,8 +27,8 @@ public class OpenCVNatives {
 	
 	private static boolean available = false;
 
-	private static String dllName  = "opencv_java452.dll";
-	private static String soName   = "libopencv_java452.so";
+	private static String dllName  = "opencv_java453.dll";
+	private static String soName   = "libopencv_java453.so";
 
 	{init();}
 

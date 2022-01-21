@@ -36,8 +36,8 @@ local_repository=${script_directory}/git
 
 logfile=${script_directory}/build.log
 
-opencvtag="4.4.0"
-opencvcontribtag="4.4.0"
+opencvtag="4.5.3"
+opencvcontribtag="4.5.3"
 
 echo "  Using repository ${local_repository}"
 

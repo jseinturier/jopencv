@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.opencv</groupId>
     <artifactId>opencv-natives</artifactId>
-    <version>4.5.2</version>
+    <version>4.5.3</version>
     
     <licenses>
       <license>
@@ -45,7 +45,41 @@
       <maven.plugin.nexus.version>1.6.8</maven.plugin.nexus.version>
       <maven.plugin.source.version>3.2.0</maven.plugin.source.version>
       <maven.plugin.scm-provider-gitexe.version>1.11.12</maven.plugin.scm-provider-gitexe.version>
+      
+      <maven.plugin.surefire.version>3.0.0-M4</maven.plugin.surefire.version>
+      
+      <junit.version>5.7.1</junit.version>
     </properties>
+    
+      <profiles>
+
+    <!-- GPG Signature on release -->
+    <profile>
+      <id>release-sign-artifacts</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+    
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.6</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
     
     <repositories>     
       <!-- local -->      
@@ -59,7 +93,7 @@
       <repository>
         <id>jorigin</id>
         <name>jorigin-maven</name>
-        <url>http://maven.jorigin.org</url>
+        <url>https://maven.jorigin.org</url>
       </repository>
       
     </repositories>
@@ -68,8 +102,21 @@
       <dependency>
         <groupId>org.opencv</groupId>
         <artifactId>opencv</artifactId>
-        <version>4.5.2</version>
+        <version>4.5.3</version>
       </dependency>
+      
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
     </dependencies>
     
     <build>
@@ -97,6 +144,12 @@
               <target>${maven.compiler.target}</target>
             </configuration>
           </plugin>
+            
+          <!-- Testing -->
+		  <plugin>
+		    <artifactId>maven-surefire-plugin</artifactId>
+			<version>${maven.plugin.surefire.version}</version>
+		  </plugin>
             
           <!-- Generate sources jar during package phase 
                equivalent to maven sources:jar -->
@@ -138,6 +191,23 @@
                 </goals>
               </execution>
             </executions>
+          </plugin>
+            
+          <!-- Checksum computation -->
+          <plugin>
+            <groupId>net.nicoulaj.maven.plugins</groupId>
+            <artifactId>checksum-maven-plugin</artifactId>
+            <version>1.11</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>artifacts</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <!-- put your configurations here -->
+            </configuration>
           </plugin>
             
           <plugin>

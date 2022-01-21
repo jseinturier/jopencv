@@ -19,7 +19,7 @@ To import the library just add the following dependency to your maven project:
 <dependency>
   <groupId>org.opencv</groupId>
   <artifactId>opencv-natives</artifactId>
-  <version>4.5.2</version>
+  <version>4.5.3</version>
 </dependency>
 ```
 
@@ -35,7 +35,10 @@ It is possible to override the OpenCV system library to use by setting the Java 
 If you prefer to build the library, following steps are required:
 
 ### 3.1. Build standard OpenCV with Java wrappers
-The ``scripts`` directory contains preconfigured scripts that enable to generate OpenCV java wrappers. When the wrappers are generated, the libraries have to be copied within the appropriate directory under ``src/main/resources``.
+The ``scripts`` directory contains preconfigured scripts that enable to generate OpenCV java wrappers. 
+When the wrappers are generated, the libraries have to be copied within the appropriate directory under ``src/main/resources``.
+
+The OpenCV Java Wrapper Jar has also to be signed and to be copied within the ``repository`` directory.
 
 ### 3.2. Build opencv natives
 From the main directory:
